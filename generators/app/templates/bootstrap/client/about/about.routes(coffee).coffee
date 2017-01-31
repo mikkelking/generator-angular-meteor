@@ -5,5 +5,5 @@ angular.module '<%= appname %>'
   $stateProvider
   .state 'about',
     url: '/about'
-    templateUrl: 'client/about/about.view<%if(!jade) {%>.ng<%}%>.html'
+    templateUrl: 'client/about/about.view<%if(!jade) {%><%}%>.html'
     controller: 'AboutCtrl'

@@ -4,7 +4,7 @@ angular.module('<%= appname %>')
 .directive('nav', function($state) {
   return {
     restrict: 'AE',
-    templateUrl: 'client/components/nav/nav.view<%if(!jade) {%>.ng<%}%>.html',
+    templateUrl: 'client/components/nav/nav.view<%if(!jade) {%><%}%>.html',
     replace: true,
     link: function(scope, elem, attrs) {
       scope.getState = function() {

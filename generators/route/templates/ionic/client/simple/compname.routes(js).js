@@ -5,7 +5,7 @@ angular.module('<%= appname %>')
   $stateProvider
   .state('<%= compname %>', {
     url: '/<%= compnameSlugged %>',
-    templateUrl: '<%= dir %>/<%=compnameSlugged%>.view<%if(!jade) {%>.ng<%}%>.html',
+    templateUrl: '<%= dir %>/<%=compnameSlugged%>.view<%if(!jade) {%><%}%>.html',
     controller: '<%= compnameCapped %>Ctrl'<% if(auth && protected) { %>,
     resolve: {
       currentUser: ['$meteor', function($meteor) {
