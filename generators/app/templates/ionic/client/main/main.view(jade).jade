@@ -1,0 +1,17 @@
+ion-pane
+  ion-content.padding.things
+    h1 Things
+    //- Due to ion-content creating a child scope, we have to use $parent to
+    //- access our own scope. This only applies for variables inside an
+    //- ion-content directive. Outside ion-content you can call 'things' directly
+    form(ng-submit='$parent.save()', name='$parent.form', novalidate='')
+      .list
+        label.item.item-input
+          input(type='text', placeholder='Name', ng-model='$parent.newThing.name')
+      button.button.button-block.button-positive(type='submit') Add
+    .list
+      .item.item-button-right(ng-repeat='thing in $parent.things')
+        p {{ thing.name }}
+        button.button.button-assertive(ng-click='$parent.remove(thing)')
+          i.icon.ion-trash-a
+    p Total number of things: {{ $parent.things.length }}
