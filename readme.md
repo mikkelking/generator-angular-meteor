@@ -100,11 +100,11 @@ yo angular-meteor:route products
 
 Produces:
 
-    client/products/products.routes.ng.coffee
-    client/products/products-list.controller.ng.coffee
-    client/products/products-list.view.ng.jade
-    client/products/product-detail.controller.ng.coffee
-    client/products/product-detail.view.ng.jade
+    client/products/products.routes.coffee
+    client/products/products-list.controller.coffee
+    client/products/products-list.view.jade
+    client/products/product-detail.controller.coffee
+    client/products/product-detail.view.jade
     client/products/products.styl
     model/products.model.coffee
     server/products.publish.coffee
@@ -122,7 +122,7 @@ yo angular-meteor:controller user
 
 Produces:
 
-    client/user/user.controller.ng.coffee
+    client/user/user.controller.coffee
 
 ### Directive
 Generates a directive.
@@ -136,8 +136,8 @@ yo angular-meteor:directive myDirective
 
 Produces:
 
-    client/components/my-directive/my-directive.directive.ng.coffee
-    client/components/my-directive/my-directive.ng.jade
+    client/components/my-directive/my-directive.directive.coffee
+    client/components/my-directive/my-directive.jade
     client/components/my-directive/my-directive.styl
 
 ### Filter
@@ -151,7 +151,7 @@ yo angular-meteor:filter myFilter
 
 Produces:
 
-    client/components/my-filter/my-filter.filter.ng.coffee
+    client/components/my-filter/my-filter.filter.coffee
 
 ### Decorator
 Generates an AngularJS service decorator.
@@ -164,7 +164,7 @@ yo angular-fullstack:decorator serviceName
 
 Produces
 
-    client/components/service-name/service-name.decorator.ng.coffee
+    client/components/service-name/service-name.decorator.coffee
 
 
 ## Meteor Components

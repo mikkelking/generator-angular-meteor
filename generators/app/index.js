@@ -303,11 +303,30 @@
         meteorToUpdate.push('dburles:mongo-collection-instances');
         meteorToUpdate.push('lai:collection-extensions');
         meteorToUpdate.push('pbastowski:angular-babel');
+        meteorToUpdate.push('autoupdate');
+        meteorToUpdate.push('blaze-html-templates');
+        meteorToUpdate.push('caching-compiler');
+        meteorToUpdate.push('caching-html-compiler');
+        meteorToUpdate.push('ddp-client');
+        meteorToUpdate.push('ddp-server');
+        meteorToUpdate.push('launch-screen');
+        meteorToUpdate.push('less');
+        meteorToUpdate.push('templating');
+        meteorToUpdate.push('templating-tools');
         if (this.filters.auth) {
           meteorToUpdate.push('dotansimha:accounts-ui-angular');
           meteorToUpdate.push('tmeasday:check-npm-versions');
+          meteorToUpdate.push('accounts-ui');
+          meteorToUpdate.push('accounts-ui-unstyled');
         }
         genUtils.spawnSync('meteor', meteorToUpdate, cb);
+      }
+    },
+    updateNpm: function() {
+      var cb;
+      if (is1point3) {
+        cb = this.async();
+        genUtils.spawnSync('npm', ['install'], cb);
       }
     },
     write: function() {

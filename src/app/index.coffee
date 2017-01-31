@@ -300,10 +300,28 @@ module.exports = yeoman.generators.Base.extend(
       meteorToUpdate.push 'dburles:mongo-collection-instances'
       meteorToUpdate.push 'lai:collection-extensions'
       meteorToUpdate.push 'pbastowski:angular-babel'
+# Recent additions (1.4.2.3) - these are now independent packages, no longer in the Meteor core
+      meteorToUpdate.push 'autoupdate'
+      meteorToUpdate.push 'blaze-html-templates'
+      meteorToUpdate.push 'caching-compiler'
+      meteorToUpdate.push 'caching-html-compiler'
+      meteorToUpdate.push 'ddp-client'
+      meteorToUpdate.push 'ddp-server'
+      meteorToUpdate.push 'launch-screen'
+      meteorToUpdate.push 'less'
+      meteorToUpdate.push 'templating'
+      meteorToUpdate.push 'templating-tools'
       if @filters.auth
         meteorToUpdate.push 'dotansimha:accounts-ui-angular'
         meteorToUpdate.push 'tmeasday:check-npm-versions'
+        meteorToUpdate.push 'accounts-ui'
+        meteorToUpdate.push 'accounts-ui-unstyled'
       genUtils.spawnSync 'meteor', meteorToUpdate, cb
+    return
+  updateNpm: ->
+    if is1point3
+      cb = @async()
+      genUtils.spawnSync 'npm', ['install'], cb
     return
   write: ->
     @filters.appname = @appname + 'App'
