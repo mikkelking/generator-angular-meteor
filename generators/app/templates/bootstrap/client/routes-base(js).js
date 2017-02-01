@@ -3,7 +3,10 @@
 angular.module('<%= appname %>')
 
 .config(function($urlRouterProvider, $locationProvider) {
-  $locationProvider.html5Mode(true);
+  $locationProvider.html5Mode({
+    enabled: true,
+    requireBase: false
+  });
   $urlRouterProvider.otherwise('/');
 })<% if(auth) { %>.run(['$rootScope', '$state', function($rootScope, $state) {
   $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {

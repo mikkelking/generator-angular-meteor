@@ -1,5 +1,5 @@
 (function() {
-  var _, _i, angularModules, fs, genUtils, is1point3, meteorToAdd, meteorToRemove, os, path, yeoman;
+  var _, _i, angularModules, fs, genUtils, is1point3, meteorToAdd, meteorToRemove, npmToAdd, os, path, yeoman;
 
   yeoman = require('yeoman-generator');
 
@@ -15,9 +15,11 @@
 
   genUtils = require('../util.js');
 
-  meteorToAdd = ['add', 'angular', 'angularui:angular-ui-router'];
+  meteorToAdd = ['add', 'pbastowski:angular-babel'];
 
   meteorToRemove = ['remove', 'blaze-html-templates', 'ecmascript'];
+
+  npmToAdd = ['install', '--save', 'angular', 'angular-meteor', 'angular-ui-router'];
 
   angularModules = ['angular-meteor', 'ui.router'];
 
@@ -249,12 +251,12 @@
         meteorToAdd.push('civilframe:angular-jade');
       }
       if (this.filters.framework === 'material') {
-        meteorToAdd.push('angular:angular-material');
+        npmToAdd.push('angular-material');
         angularModules.push('ngMaterial');
       }
       if (this.filters.framework === 'bootstrap') {
         meteorToAdd.push('twbs:bootstrap');
-        meteorToAdd.push('angularui:angular-ui-bootstrap');
+        npmToAdd.push('angular-ui-bootstrap');
         angularModules.push('ui.bootstrap');
       }
       if (this.filters.framework === 'purecss') {
@@ -264,9 +266,9 @@
         meteorToAdd.push('rainhaven:foundation-apps');
       }
       if (this.filters.framework === 'ionic') {
-        meteorToAdd.splice(meteorToAdd.indexOf('angularui:angular-ui-router'), 1);
+        npmToAdd.splice(npmToAdd.indexOf('angular-ui-router'), 1);
         meteorToAdd.push('driftyco:ionic');
-        angularModules.splice(angularModules.indexOf('ui-router'), 1);
+        npmToAdd.splice(npmToAdd.indexOf('angular-ui-router'), 1);
         angularModules.push('ionic');
       }
       if (this.filters.bower) {
@@ -274,7 +276,7 @@
       }
       if (this.filters.pagination) {
         meteorToAdd.push('tmeasday:publish-counts');
-        meteorToAdd.push('angularutils:pagination');
+        npmToAdd.push('angular-utils-pagination');
         angularModules.push('angularUtils.directives.dirPagination');
       }
       if (this.filters.auth) {
@@ -300,7 +302,14 @@
         genUtils.spawnSync('meteor', ['update', '--all-packages'], cb);
       }
     },
-    updateNpm: function() {
+    addToNpm: function() {
+      var cb;
+      if (is1point3) {
+        cb = this.async();
+        genUtils.spawnSync('npm', npmToAdd, cb);
+      }
+    },
+    npmInstall: function() {
       var cb;
       if (is1point3) {
         cb = this.async();

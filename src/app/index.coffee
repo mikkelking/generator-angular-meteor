@@ -7,13 +7,19 @@ os = require('os')
 genUtils = require('../util.js')
 meteorToAdd = [
   'add'
-  'angular'
-  'angularui:angular-ui-router'
+  'pbastowski:angular-babel'
 ]
 meteorToRemove = [
   'remove'
   'blaze-html-templates'
   'ecmascript'
+]
+npmToAdd = [
+  'install'
+  '--save'
+  'angular'
+  'angular-meteor'
+  'angular-ui-router'
 ]
 angularModules = [
   'angular-meteor'
@@ -258,26 +264,26 @@ module.exports = yeoman.generators.Base.extend(
     if @filters.jade
       meteorToAdd.push 'civilframe:angular-jade'
     if @filters.framework is 'material'
-      meteorToAdd.push 'angular:angular-material'
+      npmToAdd.push 'angular-material'
       angularModules.push 'ngMaterial'
     if @filters.framework is 'bootstrap'
       meteorToAdd.push 'twbs:bootstrap'
-      meteorToAdd.push 'angularui:angular-ui-bootstrap'
+      npmToAdd.push 'angular-ui-bootstrap'
       angularModules.push 'ui.bootstrap'
     if @filters.framework is 'purecss'
       meteorToAdd.push 'mrt:purecss'
     if @filters.framework is 'foundationapps'
       meteorToAdd.push 'rainhaven:foundation-apps'
     if @filters.framework is 'ionic'
-      meteorToAdd.splice meteorToAdd.indexOf('angularui:angular-ui-router'), 1
+      npmToAdd.splice npmToAdd.indexOf('angular-ui-router'), 1
       meteorToAdd.push 'driftyco:ionic'
-      angularModules.splice angularModules.indexOf('ui-router'), 1
+      npmToAdd.splice npmToAdd.indexOf('angular-ui-router'), 1
       angularModules.push 'ionic'
     if @filters.bower
       meteorToAdd.push 'mquandalle:bower'
     if @filters.pagination
       meteorToAdd.push 'tmeasday:publish-counts'
-      meteorToAdd.push 'angularutils:pagination'
+      npmToAdd.push 'angular-utils-pagination'
       angularModules.push 'angularUtils.directives.dirPagination'
     if @filters.auth
       meteorToAdd.push 'accounts-password'
@@ -296,7 +302,12 @@ module.exports = yeoman.generators.Base.extend(
       cb = @async()
       genUtils.spawnSync 'meteor', ['update','--all-packages'], cb
     return
-  updateNpm: ->
+  addToNpm: ->
+    if is1point3
+      cb = @async()
+      genUtils.spawnSync 'npm', npmToAdd, cb
+    return
+  npmInstall: ->
     if is1point3
       cb = @async()
       genUtils.spawnSync 'npm', ['install'], cb
