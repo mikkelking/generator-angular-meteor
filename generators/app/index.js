@@ -294,20 +294,17 @@
       genUtils.spawnSync('meteor', meteorToAdd, cb);
     },
     updateMeteorPackages: function() {
-      var cb, meteorToUpdate;
+      var cb;
       if (is1point3) {
         cb = this.async();
-        meteorToUpdate = meteorToAdd;
-        meteorToUpdate[0] = 'update';
-        meteorToUpdate.push('angular:angular');
-        meteorToUpdate.push('dburles:mongo-collection-instances');
-        meteorToUpdate.push('lai:collection-extensions');
-        meteorToUpdate.push('pbastowski:angular-babel');
-        if (this.filters.auth) {
-          meteorToUpdate.push('dotansimha:accounts-ui-angular');
-          meteorToUpdate.push('tmeasday:check-npm-versions');
-        }
-        genUtils.spawnSync('meteor', meteorToUpdate, cb);
+        genUtils.spawnSync('meteor', ['update', '--all-packages'], cb);
+      }
+    },
+    updateNpm: function() {
+      var cb;
+      if (is1point3) {
+        cb = this.async();
+        genUtils.spawnSync('npm', ['install'], cb);
       }
     },
     write: function() {

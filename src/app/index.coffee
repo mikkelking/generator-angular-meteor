@@ -294,16 +294,12 @@ module.exports = yeoman.generators.Base.extend(
   updateMeteorPackages: ->
     if is1point3
       cb = @async()
-      meteorToUpdate = meteorToAdd
-      meteorToUpdate[0] = 'update'
-      meteorToUpdate.push 'angular:angular'
-      meteorToUpdate.push 'dburles:mongo-collection-instances'
-      meteorToUpdate.push 'lai:collection-extensions'
-      meteorToUpdate.push 'pbastowski:angular-babel'
-      if @filters.auth
-        meteorToUpdate.push 'dotansimha:accounts-ui-angular'
-        meteorToUpdate.push 'tmeasday:check-npm-versions'
-      genUtils.spawnSync 'meteor', meteorToUpdate, cb
+      genUtils.spawnSync 'meteor', ['update','--all-packages'], cb
+    return
+  updateNpm: ->
+    if is1point3
+      cb = @async()
+      genUtils.spawnSync 'npm', ['install'], cb
     return
   write: ->
     @filters.appname = @appname + 'App'
